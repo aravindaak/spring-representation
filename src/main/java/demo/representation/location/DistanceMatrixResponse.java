@@ -7,6 +7,7 @@ public class DistanceMatrixResponse {
 	private List<List<String>> distance;
 	private List<List<Integer>> time;
 	private List<String> possibleLocations;
+	private ArrayList<ArrayList<String>> traversedPath;
 	
 	public DistanceMatrixResponse() {
 		setPossibleLocations(new ArrayList<String>());
@@ -36,5 +37,13 @@ public class DistanceMatrixResponse {
 	public void setPossibleLocations(List<String> possibleLocations) {
 		if(this.possibleLocations == null)
 		this.possibleLocations = possibleLocations;
+	}
+
+	public ArrayList<ArrayList<String>> getTraversedPath() {
+		return traversedPath;
+	}
+
+	public void setTraversedPath(ArrayList<ArrayList<String>> traversedPath) {
+		this.traversedPath = traversedPath;
 	}
 }

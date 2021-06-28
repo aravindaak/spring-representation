@@ -1,6 +1,7 @@
 package demo.representation.location;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -45,6 +46,35 @@ public class LocationService {
 		distanceResp.setPossibleLocations(tempList);
 		return distanceResp;
 	}
+	
+	public DistanceMatrixResponse find(String personId, String lastKnownLocation, Integer timeElapsed, String nodesToConsider) {
+		Optional<Person> optionalPerson = personService.getPerson(personId);
+		Person person = optionalPerson.get();
+		List<String> locationList = person.getKnownLocations();
+		//Setting the lastKnownLocn as the first element		
+		locationList.add(0, lastKnownLocation);
+		DistanceMatrixResponse distanceResp = getDistanceMatrix(locationList);
+		List<List<Integer>> timeList =distanceResp.getTime();
+		System.out.println(timeList);
+		ArrayList<ArrayList<String>> traversedPath= new ArrayList<>();
+		for(int i=1; i< locationList.size(); i++) {
+			int timeSum = timeList.get(0).get(i);
+			for(int j =1; j< locationList.size(); j++) {
+				if((i!=j) && timeSum+timeList.get(i).get(j) < timeElapsed) {
+					ArrayList<String> temp = new ArrayList<String>();
+					temp.add(locationList.get(0));
+					temp.add(locationList.get(i));
+					temp.add(locationList.get(j));
+					traversedPath.add(temp);
+				}
+					
+			}
+		}
+		distanceResp.setTraversedPath(traversedPath);
+		return distanceResp;
+	}
+	
+	
 	public DistanceMatrixResponse getDistanceMatrix(List<String> knownLocations) {
 		
 		DistanceMatrix distanceMatrix = new DistanceMatrix(knownLocations, Map.of("allToAll", true));
@@ -56,6 +86,8 @@ public class LocationService {
 		
 		return distanceResponseObj;
 	}
+
+	
 	
 
 }
