@@ -34,8 +34,7 @@ public class LocationService {
 		
 		List<Integer> timeList =distanceResp.getTime().get(0);
 		
-		List<String> tempList =  distanceResp.getPossibleLocations();
-		
+		ArrayList<String> tempList = new ArrayList<String>();
 		
 		for(int i=0; i< timeList.size(); i++) {
 			if(timeList.get(i) < timeElapsed) {
@@ -55,7 +54,6 @@ public class LocationService {
 		locationList.add(0, lastKnownLocation);
 		DistanceMatrixResponse distanceResp = getDistanceMatrix(locationList);
 		List<List<Integer>> timeList =distanceResp.getTime();
-		System.out.println(timeList);
 		ArrayList<ArrayList<String>> traversedPath= new ArrayList<>();
 		for(int i=1; i< locationList.size(); i++) {
 			int timeSum = timeList.get(0).get(i);

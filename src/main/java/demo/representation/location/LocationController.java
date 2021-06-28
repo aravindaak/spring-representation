@@ -20,8 +20,8 @@ public class LocationController {
 	
 	@PostMapping(path="find")
 	public DistanceMatrixResponse find(@RequestBody Map<String, Object> reqMap) {
-		String nodesToConsider = reqMap.get("nodesToConsider").toString();
-		if(nodesToConsider != null) return locationService.find(reqMap.get("personId").toString(),reqMap.get("lastKnownLocation").toString(),(Integer)reqMap.get("timeElapsed"), nodesToConsider);
+		Object nodesToConsider = reqMap.get("nodesToConsider");
+		if(nodesToConsider != null) return locationService.find(reqMap.get("personId").toString(),reqMap.get("lastKnownLocation").toString(),(Integer)reqMap.get("timeElapsed"), nodesToConsider.toString());
 		return locationService.find(reqMap.get("personId").toString(),reqMap.get("lastKnownLocation").toString(),(Integer)reqMap.get("timeElapsed"));
 		
 	}

@@ -6,15 +6,14 @@ import java.util.List;
 public class DistanceMatrixResponse {
 	private List<List<String>> distance;
 	private List<List<Integer>> time;
-	private List<String> possibleLocations;
+	private ArrayList<String> possibleLocations;
 	private ArrayList<ArrayList<String>> traversedPath;
 	
 	public DistanceMatrixResponse() {
-		setPossibleLocations(new ArrayList<String>());
 	}
 	
-	public DistanceMatrixResponse(List<List<String>> distance, List<List<Integer>> time, List<String> possibleLocations) {
-		this.distance=distance; this.time=time; setPossibleLocations(possibleLocations);
+	public DistanceMatrixResponse(List<List<String>> distance, List<List<Integer>> time, ArrayList<String> possibleLocations) {
+		setDistance(distance);setTime(time); setPossibleLocations(possibleLocations);
 	}
 	
 	public List<List<String>> getDistance() {
@@ -30,20 +29,19 @@ public class DistanceMatrixResponse {
 		this.time = time;
 	}
 
-	public List<String> getPossibleLocations() {
-		return possibleLocations;
-	}
-
-	public void setPossibleLocations(List<String> possibleLocations) {
-		if(this.possibleLocations == null)
-		this.possibleLocations = possibleLocations;
-	}
-
 	public ArrayList<ArrayList<String>> getTraversedPath() {
 		return traversedPath;
 	}
 
 	public void setTraversedPath(ArrayList<ArrayList<String>> traversedPath) {
 		this.traversedPath = traversedPath;
+	}
+
+	public ArrayList<String> getPossibleLocations() {
+		return possibleLocations;
+	}
+
+	public void setPossibleLocations(ArrayList<String> possibleLocations) {
+		this.possibleLocations = possibleLocations;
 	}
 }
